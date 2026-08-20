@@ -4,11 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "setup": "npm install --save-dev html-webpack-plugin && npm install --save-dev style-loader css-loader && npm install --save-dev html-loader",
+    "setup": "npm install --save-dev html-webpack-plugin style-loader css-loader html-loader",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack serve --config webpack.dev.js",
-    "deploy": "git subtree push --prefix dist origin gh-pages"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
+    "git:save": "git add . && git commit -m \"feat: update app\"",
+    "git:push": "git push origin main",
+    "publish:app": "npm run git:save && npm run git:push && npm run deploy"
   },
   "keywords": [],
   "author": "",

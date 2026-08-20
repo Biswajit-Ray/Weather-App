@@ -1,20 +1,36 @@
-import { setWeather } from './weather.js';
 import './style.css'; 
+import { getWeather } from './weather.js';
+import { renderUI } from './UI.js';
 
-// 1. Grab the search elements from the DOM
 const searchBtn = document.getElementById('search-btn');
 const cityInput = document.getElementById('city-input');
 
-// 2. The Event Listener (The Click Trigger)
-searchBtn.addEventListener('click', () => {
-    // Read the text out of the input box
-    const city = cityInput.value.trim(); 
+// A helper function to manage the workflow
+async function handleSearch(city) {
+    if (!city) return;
     
-    if (city) {
-        // Feed the user's text into your state machine!
-        setWeather(city);
+    // 1. Ask weather.js for the data (wait for it to finish)
+    const weatherData = await getWeather(city);
+    
+    // 2. If we successfully got data, hand it to UI.js
+    if (weatherData) {
+        renderUI(weatherData);
+    }
+}
+
+// Click Trigger
+searchBtn.addEventListener('click', () => {
+    const city = cityInput.value.trim(); 
+    handleSearch(city);
+});
+
+// Enter Key Trigger
+cityInput.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+        const city = cityInput.value.trim();
+        handleSearch(city);
     }
 });
 
-// Kick off the app with a default location so it isn't blank on load
-setWeather('London');
+// Kick off the app on load
+handleSearch('London');
