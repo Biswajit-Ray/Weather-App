@@ -2,6 +2,8 @@ import './style.css';
 import { getWeather } from './weather.js';
 import { renderUI } from './UI.js';
 
+console.log("Hello from index.js! The script is running.");
+
 const searchBtn = document.getElementById('search-btn');
 const cityInput = document.getElementById('city-input');
 

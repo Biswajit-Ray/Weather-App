@@ -1,5 +1,3 @@
-// No imports needed here anymore!
-
 const API_Key = '6VCWQWX69B66FFVUU8QFKMHLT';
 
 export async function getWeather(location = 'London') {
