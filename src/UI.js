@@ -1,5 +1,3 @@
-// No imports needed here either!
-
 export function renderUI(weatherData) {
     // Safety check: Do not render if data is missing or failed to fetch
     if (!weatherData) return;
@@ -19,15 +17,15 @@ export function renderUI(weatherData) {
     locationName.textContent = weatherData.address;
     
     if (weatherData.currentCondition) {
-        temperature.textContent = `${weatherData.currentCondition.temp}°`;
+        temperature.textContent = `${weatherData.currentCondition.temp}°F`;
         condition.textContent = weatherData.currentCondition.conditions;
     }
     
     description.textContent = weatherData.description;
 
-    if (feelsLike) feelsLike.textContent = `${weatherData.feelsLike}°`;
+    if (feelsLike) feelsLike.textContent = `${weatherData.feelsLike}°F`;
     if (humidity) humidity.textContent = `${weatherData.humidity}%`;
-    if (windSpeed) windSpeed.textContent = `${weatherData.windSpeed} mph`;
+    if (windSpeed) windSpeed.textContent = `${weatherData.windSpeed}mph`;
 
     // Reveal the UI
     displayElement.classList.remove('hidden');
